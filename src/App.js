@@ -58,6 +58,12 @@ class App extends React.Component {
     this.setState({todosOnState: newState});
   }
 
+  clearCompleted = () => {
+    let oldState = this.state.todosOnState;
+    let newState = oldState.filter(todo => todo.completed == false)
+    this.setState({todosOnState: newState});
+  }
+
   render() {
     return (
       <div>
@@ -70,6 +76,7 @@ class App extends React.Component {
           change={this.handleChanges} 
           value={this.state.todo.task}
           add={this.addTodo}
+          clear={this.clearCompleted}
         />
       </div>
     );
