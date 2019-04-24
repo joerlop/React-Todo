@@ -9,7 +9,10 @@ import Todo from "./Todo";
 function TodoList(props) {
   return (
     props.todoList.map(todo => {
-      return <Todo todoProp={todo}/>
+      return <Todo 
+        todoProp={todo}
+        completeProp={props.complete}
+      />
     })
   );
 }

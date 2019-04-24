@@ -3,7 +3,9 @@ import './Todo.scss';
 
 function Todo(props) {
   return (
-    <p>{props.todoProp.task}</p>      
+    <div className={`completed-${props.todoProp.completed}`} onClick={() => props.completeProp(props.todoProp.id)}>
+      {props.todoProp.task}
+    </div>      
   );
 }
   
