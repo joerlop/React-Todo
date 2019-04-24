@@ -4,10 +4,13 @@
 import React from 'react';
 import './Todo.scss';
 
-function TodoList() {
+import Todo from "./Todo";
+
+function TodoList(props) {
   return (
-    //iterate over todo array generating new
-    //Todo element for each element in array
+    props.todoList.map(todo => {
+      return <Todo todoProp={todo}/>
+    })
   );
 }
 

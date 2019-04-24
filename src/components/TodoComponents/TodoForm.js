@@ -1,10 +1,18 @@
 import React from 'react';
 import './Todo.scss';
 
-function TodoForm() {
+function TodoForm(props) {
   return (
-    //iterate over todo array generating new
-    //Todo element for each element in array
+    <form onSubmit={props.add}>
+      <input
+        placeholder="todo"
+        value={props.value}
+        onChange={props.change}
+        name="todo"
+      />
+      <button onClick={props.add}>Add todo</button>
+      <button onClick="">Clear completed</button>      
+    </form>
   );
 }
 

@@ -1,11 +1,10 @@
 import React from 'react';
 import './Todo.scss';
 
-function Todo() {
-    return (
-      //iterate over todo array generating new
-      //Todo element for each element in array
-    );
-  }
+function Todo(props) {
+  return (
+    <p>{props.todoProp.task}</p>      
+  );
+}
   
   export default Todo;
