@@ -3,7 +3,7 @@ import './Todo.scss';
 
 function TodoForm(props) {
   return (
-    <form onSubmit={props.add}>
+    <form className="form" onSubmit={props.add}>
       <input
         placeholder="todo"
         value={props.value}

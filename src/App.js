@@ -3,6 +3,8 @@ import React from 'react';
 import TodoList from "./components/TodoComponents/TodoList";
 import TodoForm from "./components/TodoComponents/TodoForm";
 
+import './App.scss';
+
 const todoArray = [];
 
 class App extends React.Component {
@@ -58,7 +60,8 @@ class App extends React.Component {
     this.setState({todosOnState: newState});
   }
 
-  clearCompleted = () => {
+  clearCompleted = event => {
+    event.preventDefault();
     let oldState = this.state.todosOnState;
     let newState = oldState.filter(todo => todo.completed == false)
     this.setState({todosOnState: newState});
@@ -66,7 +69,7 @@ class App extends React.Component {
 
   render() {
     return (
-      <div>
+      <div className="app-container">
         <h1>To-do!</h1>
         <TodoList 
           todoList={this.state.todosOnState}
