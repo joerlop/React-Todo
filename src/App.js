@@ -26,6 +26,7 @@ class App extends React.Component {
       todoOnSearch: {
         value: "",
       },
+      todosBeforeSearch: {}
     }
   }
 
@@ -91,9 +92,22 @@ class App extends React.Component {
     event.preventDefault();
     let oldState = this.state.todosOnState;
     let newState = oldState.filter(todo => todo.task === this.state.todoOnSearch.value)
-    this.setState({todosOnState: newState});
+    this.setState({
+      todosOnState: newState,
+      todosBeforeSearch: oldState
+    });
+    console.log(this.state.todosBeforeSearch)
     
     localStorage.setItem("todosOnState", JSON.stringify(newState));
+  }
+
+  goBack = event => {
+    event.preventDefault();
+    console.log("Hola");
+    this.setState({
+      todosOnState: this.state.todosBeforeSearch,
+      todosBeforeSearch: {}
+    })
   }
 
   hydrateStateWithLocalStorage() {
@@ -128,6 +142,7 @@ class App extends React.Component {
           search={this.search}
           change={this.handleSearch}
           value={this.state.todoOnSearch.value}
+          back={this.goBack}
         />
         <TodoList 
           todoList={this.state.todosOnState}

@@ -10,7 +10,8 @@ function SearchForm(props) {
         value={props.value}
         onChange={props.change}
       />
-      <button onClick={() => props.search}>Go!</button>     
+      <button onClick={() => props.search}>Search!</button>
+      <button onClick={props.back}>Back</button>     
     </form>
   );
 }
