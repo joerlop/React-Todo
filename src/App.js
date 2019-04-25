@@ -111,7 +111,8 @@ class App extends React.Component {
     console.log("Hola");
     this.setState({
       todosOnState: this.state.todosBeforeSearch,
-      todosBeforeSearch: {}
+      todosBeforeSearch: [],
+      todoOnSearch: { value: "" }
     })
   }
 
