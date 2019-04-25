@@ -2,6 +2,7 @@ import React from 'react';
 
 import TodoList from "./components/TodoComponents/TodoList";
 import TodoForm from "./components/TodoComponents/TodoForm";
+import SearchForm from "./components/TodoComponents/SearchForm";
 
 import './App.scss';
 
@@ -21,7 +22,10 @@ class App extends React.Component {
         task: "",
         id: "",
         completed: false,
-      }
+      },
+      todoOnSearch: {
+        value: "",
+      },
     }
   }
 
@@ -31,6 +35,14 @@ class App extends React.Component {
         ...this.state.todo,
         task: event.target.value,
         id: Date.now(),
+      }
+    })
+  }
+
+  handleSearch = event => {
+    this.setState({
+      todoOnSearch: {
+        value: event.target.value,
       }
     })
   }
@@ -75,6 +87,15 @@ class App extends React.Component {
     localStorage.setItem("todosOnState", JSON.stringify(newState));
   }
 
+  search = event => {
+    event.preventDefault();
+    let oldState = this.state.todosOnState;
+    let newState = oldState.filter(todo => todo.task === this.state.todoOnSearch.value)
+    this.setState({todosOnState: newState});
+    
+    localStorage.setItem("todosOnState", JSON.stringify(newState));
+  }
+
   hydrateStateWithLocalStorage() {
     // for all items in state
     for (let key in this.state) {
@@ -103,6 +124,11 @@ class App extends React.Component {
     return (
       <div className="app-container">
         <h1>To-do!</h1>
+        <SearchForm 
+          search={this.search}
+          change={this.handleSearch}
+          value={this.state.todoOnSearch.value}
+        />
         <TodoList 
           todoList={this.state.todosOnState}
           complete={this.completeTodo}
