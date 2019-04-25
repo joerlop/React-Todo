@@ -45,6 +45,10 @@ class App extends React.Component {
         completed: false,
       }
     });
+
+    
+    localStorage.setItem("todosOnState", JSON.stringify(this.state.todosOnState));
+    localStorage.setItem("todo", JSON.stringify(this.state.todo));
   };
 
   completeTodo = id => {
@@ -58,6 +62,8 @@ class App extends React.Component {
     })
 
     this.setState({todosOnState: newState});
+
+    localStorage.setItem("todosOnState", JSON.stringify(newState));
   }
 
   clearCompleted = event => {
@@ -65,7 +71,33 @@ class App extends React.Component {
     let oldState = this.state.todosOnState;
     let newState = oldState.filter(todo => todo.completed == false)
     this.setState({todosOnState: newState});
+    
+    localStorage.setItem("todosOnState", JSON.stringify(newState));
   }
+
+  hydrateStateWithLocalStorage() {
+    // for all items in state
+    for (let key in this.state) {
+      // if the key exists in localStorage
+      if (localStorage.hasOwnProperty(key)) {
+        // get the key's value from localStorage
+        let value = localStorage.getItem(key);
+
+        // parse the localStorage string and setState
+        try {
+          value = JSON.parse(value);
+          this.setState({ [key]: value });
+        } catch (e) {
+          // handle empty string
+          this.setState({ [key]: value });
+        }
+      }
+    }
+  }
+
+  componentDidMount() {
+    this.hydrateStateWithLocalStorage();
+ }
 
   render() {
     return (
