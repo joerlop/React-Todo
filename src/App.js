@@ -26,7 +26,7 @@ class App extends React.Component {
       todoOnSearch: {
         value: "",
       },
-      todosBeforeSearch: {}
+      todosBeforeSearch: []
     }
   }
 
@@ -83,8 +83,13 @@ class App extends React.Component {
     event.preventDefault();
     let oldState = this.state.todosOnState;
     let newState = oldState.filter(todo => todo.completed == false)
-    this.setState({todosOnState: newState});
-    
+    let oldSearchState = this.state.todosBeforeSearch;
+    let newSearchState = oldSearchState.filter(todo => todo.completed == false)
+
+    this.setState({
+      todosOnState: newState,
+      todosBeforeSearch: newSearchState
+    });
     localStorage.setItem("todosOnState", JSON.stringify(newState));
   }
 
